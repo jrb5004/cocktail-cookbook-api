@@ -49,6 +49,7 @@ cocktailsRouter
       .catch(next)
   })
 
+
   cocktailsRouter
     .route('/:cocktail_id')
     .all((req, res, next) => {
@@ -72,8 +73,8 @@ cocktailsRouter
         res.json(serializeCocktail(res.cocktail))
       })
       .patch(jsonParser, (req, res, next) => {
-        const { ingredients, steps } = req.body
-        const recipeToUpdate = { ingredients, steps }
+        const { name, ingredients, steps } = req.body
+        const recipeToUpdate = { name, ingredients, steps }
         console.log(req.body)
 
         for (const [key, value] of Object.entries(recipeToUpdate)) 
@@ -92,5 +93,47 @@ cocktailsRouter
           })
           .catch(next)
       })
+
+
+      cocktailsRouter
+      .route('/:cocktail_id/reviews')
+      .all((req, res, next) => {
+          console.log(req.params)
+          CocktailsService.getById(
+            req.app.get('db'),
+            req.params.cocktail_id
+          )
+            .then(cocktail => {
+              if (!cocktail) {
+                return res.status(404).json({
+                  error: { message: `cocktail doesn't exist in cookbook` }
+                })
+              }
+              res.cocktail = cocktail
+              next()
+            })
+            .catch(next)
+        })
+        .patch(jsonParser, (req, res, next) => {
+          const { review } = req.body
+          const newReview = { review }
+          console.log(req.body)
+  
+          for (const [key, value] of Object.entries(newReview)) 
+            if (value == null) 
+              return res.status(400).json({
+                error: { message: `'${key}' field is required` }
+          })
+      
+          CocktailsService.addReview(
+            req.app.get('db'),
+            req.params.cocktail_id,
+            newReview
+          )
+            .then(numRowsAffected => {
+              res.status(204).end()
+            })
+            .catch(next)
+        })
 
 module.exports = cocktailsRouter

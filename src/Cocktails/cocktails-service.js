@@ -18,10 +18,16 @@ const CocktailsService = {
             })
     },
 
-    updateRecipe(knex, id, newNoteFields) {
+    updateRecipe(knex, id, newRecipeFields) {
         return knex('cocktails')
         .where({ id })
-        .update(newNoteFields)
+        .update(newRecipeFields)
+    },
+
+    addReview(knex, id, newReview) {
+        return knex('cocktails')
+        .where({ id })
+        .insert({reviews: newReview})
     },
 }
 
