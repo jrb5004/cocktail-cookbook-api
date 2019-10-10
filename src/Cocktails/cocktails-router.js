@@ -116,19 +116,20 @@ cocktailsRouter
         })
         .patch(jsonParser, (req, res, next) => {
           const { review } = req.body
-          const newReview = { review }
+         
           console.log(req.body)
-  
-          for (const [key, value] of Object.entries(newReview)) 
+          console.log(review)
+          
+          for (const [key, value] of Object.entries(req.body)) 
             if (value == null) 
               return res.status(400).json({
                 error: { message: `'${key}' field is required` }
           })
-      
+         
           CocktailsService.addReview(
             req.app.get('db'),
             req.params.cocktail_id,
-            newReview
+            review
           )
             .then(numRowsAffected => {
               res.status(204).end()

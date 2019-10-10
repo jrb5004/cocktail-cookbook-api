@@ -27,7 +27,7 @@ const CocktailsService = {
     addReview(knex, id, newReview) {
         return knex('cocktails')
         .where({ id })
-        .insert({reviews: newReview})
+        .update({reviews: knex.raw('array_append(reviews, ?)', [newReview])})
     },
 }
 
