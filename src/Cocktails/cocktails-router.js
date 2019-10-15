@@ -91,6 +91,22 @@ cocktailsRouter
           .then(numRowsAffected => {
             res.status(204).end()
           })
+          .then(numRowsAffected => {
+            CocktailsService.getById(
+              req.app.get('db'),
+              req.params.cocktail_id
+            )
+          .then(cocktail => {
+            if (!cocktail) {
+              return res.status(404).json({
+                error: { message: `cocktail doesn't exist in cookbook` }
+              })
+            }
+            res.cocktail = cocktail
+            res.json(cocktail)
+          })
+          .catch(next)
+          })
           .catch(next)
       })
 
