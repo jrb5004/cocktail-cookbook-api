@@ -26,4 +26,4 @@ An app for professional mixologists/bartenders and at-home entertainers to acces
 
 
 ## Technologies Used
-JavaScript/React/CSS/Node.js/PostreSQL  (This repository is for the server/Node.JS files associated with this project.  Please see my 'cocktail-cookbook' repository for the front end JavaScript/React files.)
+JavaScript/React/CSS/Node.js/Express/PostreSQL  (This repository is for the server/Node.JS files associated with this project.  Please see my 'cocktail-cookbook' repository for the front end JavaScript/React files.)
