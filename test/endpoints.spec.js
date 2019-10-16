@@ -1,6 +1,6 @@
 const knex = require('knex')
 const app = require('../src/app')
-const { makeCategoriesArray, makeRecipeArray } = require('./sample.data')
+const { makeCategoriesArray, makeRecipeArray, makeExpectedRecipeArray } = require('./sample.data')
 
 describe('Categories Endpoints', function() {
   let db
@@ -83,6 +83,7 @@ describe('Cocktails Endpoints', function() {
     describe(`GET /api/cocktails`, () => {
       context('Given there are cocktails in the database', () => {
         const testRecipes = makeRecipeArray()
+        const expectedRecipes =makeExpectedRecipeArray()
   
         beforeEach('insert recipes', () => {
           return db
@@ -94,7 +95,7 @@ describe('Cocktails Endpoints', function() {
           return supertest(app)
             .get('/api/cocktails')
             .set('Authorization', `Bearer ${process.env.API_TOKEN}`)
-            .expect(200, testRecipes)
+            .expect(200, expectedRecipes)
         })
       })
     })
@@ -102,7 +103,7 @@ describe('Cocktails Endpoints', function() {
     describe(`GET /api/cocktails/:cocktail_id`, () => {
         context('Given there are cocktails in the database', () => {
           const testRecipes = makeRecipeArray()
-    
+          const expectedRecipes = makeExpectedRecipeArray()
           beforeEach('insert recipes', () => {
             return db
               .into('cocktails')
@@ -111,7 +112,7 @@ describe('Cocktails Endpoints', function() {
     
           it('responds with 200 and appropriate recipe', () => {
             const recipeId = 2
-            const expectedRecipe = testRecipes[recipeId - 1]
+            const expectedRecipe = expectedRecipes[recipeId - 1]
             return supertest(app)
               .get(`/api/cocktails/${recipeId}`)
               .set('Authorization', `Bearer ${process.env.API_TOKEN}`)
