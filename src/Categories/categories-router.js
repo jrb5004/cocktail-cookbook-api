@@ -25,7 +25,6 @@ categoriesRouter
   categoriesRouter
     .route('/:category_id')
     .all((req, res, next) => {
-      console.log(req.params)
       CategoriesService.getById(
         req.app.get('db'),
         req.params.category_id

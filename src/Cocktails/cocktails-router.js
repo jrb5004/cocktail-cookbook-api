@@ -53,7 +53,6 @@ cocktailsRouter
   cocktailsRouter
     .route('/:cocktail_id')
     .all((req, res, next) => {
-        console.log(req.params)
         CocktailsService.getById(
           req.app.get('db'),
           req.params.cocktail_id
@@ -75,7 +74,6 @@ cocktailsRouter
       .patch(jsonParser, (req, res, next) => {
         const { name, ingredients, steps } = req.body
         const recipeToUpdate = { name, ingredients, steps }
-        console.log(req.body)
 
         for (const [key, value] of Object.entries(recipeToUpdate)) 
           if (value == null) 
@@ -110,7 +108,6 @@ cocktailsRouter
       cocktailsRouter
       .route('/:cocktail_id/reviews')
       .all((req, res, next) => {
-          console.log(req.params)
           CocktailsService.getById(
             req.app.get('db'),
             req.params.cocktail_id
@@ -128,9 +125,6 @@ cocktailsRouter
         })
         .patch(jsonParser, (req, res, next) => {
           const { review } = req.body
-         
-          console.log(req.body)
-          console.log(review)
           
           for (const [key, value] of Object.entries(req.body)) 
             if (value == null) 
