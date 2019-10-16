@@ -1,26 +1,25 @@
-# Express Boilerplate!
+# The Cocktail Cookbook
+Link to live app: https://cocktail-cookbook.jrb5004.now.sh/addrecipe
 
-This is a boilerplate project used for starting new projects!
+## Screenshots
 
-## Set up
+### Homepage:
+![homepage](src/Images/homescreenshot.PNG)
 
-Complete the following steps to start a new project (NEW-PROJECT-NAME):
+### Results page:
+![recipe page](src/Images/recipescreenshot.PNG)
 
-1. Clone this repository to your local machine `git clone BOILERPLATE-URL NEW-PROJECTS-NAME`
-2. `cd` into the cloned repository
-3. Make a fresh start of the git history for this project with `rm -rf .git && git init`
-4. Install the node dependencies `npm install`
-5. Move the example Environment file to `.env` that will be ignored by git and read by the express server `mv example.env .env`
-6. Edit the contents of the `package.json` to use NEW-PROJECT-NAME instead of `"name": "express-boilerplate",`
+## App Summary
+An app for professional mixologists/bartenders and at-home entertainers to access a database of cocktail rescipes organized by category, add new recipes to the collection, and edit/improve existing recipes.
 
-## Scripts
+## API Documentation 
+- API Base URL: https://damp-reaches-42499.herokuapp.com
+  - Categories Endpoints:
+    - '/api/categories'
+      - Accepts GET requests to return all categories in the database.
+    
+    
 
-Start the application `npm start`
 
-Start nodemon for the application `npm run dev`
-
-Run the tests `npm test`
-
-## Deploying
-
-When your new project is ready for deployment, add a new Heroku application with `heroku create`. This will make a new git remote called "heroku" and you can then `npm run deploy` which will push to this remote's master branch.
+## Technologies Used
+JavaScript/React/CSS/Node.js/PostreSQL  (This repository is for the server/Node.JS files associated with this project.  Please see my 'cocktail-cookbook' repository for the front end JavaScript/React files.)
